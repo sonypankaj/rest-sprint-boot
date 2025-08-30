@@ -4,14 +4,17 @@ import com.example.javaspringtbootjpa.model.Tour;
 import com.example.javaspringtbootjpa.model.TourRating;
 import com.example.javaspringtbootjpa.repo.TourRatingRepository;
 import com.example.javaspringtbootjpa.repo.TourRepository;
+import jakarta.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.OptionalDouble;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /** Tour Rating Service */
 @Service
+@Transactional
 public class TourRatingService {
   private TourRatingRepository tourRatingRepository;
   private TourRepository tourRepository;
@@ -127,12 +130,29 @@ public class TourRatingService {
    *
    * @param tourId tour identifier
    * @return average score as a Double.
-   * @throws NoSuchElementException
+   * @throws NoSuchElementException if invalid tours id
    */
   public Double getAverageScore(int tourId) throws NoSuchElementException {
     List<TourRating> ratings = tourRatingRepository.findByTourId(verifyTour(tourId).getId());
     OptionalDouble average = ratings.stream().mapToInt(TourRating::getScore).average();
     return average.isPresent() ? average.getAsDouble() : null;
+  }
+
+  /**
+   * Service for many customers to give the same score for a service
+   *
+   * @param tourId
+   * @param score
+   * @param customers list of unique customers IDs for which ratings need to be updated
+   */
+  public void rateMany(int tourId, int score, List<Integer> customers) {
+    Tour tour = verifyTour(tourId);
+    for (Integer customerId : customers) {
+      if (tourRatingRepository.findByTourIdAndCustomerId(tourId, customerId).isPresent()) {
+        throw new ConstraintViolationException("Unable to create duplicate ratings", null);
+      }
+      tourRatingRepository.save(new TourRating(tour, customerId, score));
+    }
   }
 
   /**
