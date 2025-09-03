@@ -1,4 +1,4 @@
-package com.example.javaspringtbootjpa.repo;
+package com.example.javaspringtbootjpa.repository;
 
 import com.example.javaspringtbootjpa.model.TourPackage;
 import java.util.Optional;

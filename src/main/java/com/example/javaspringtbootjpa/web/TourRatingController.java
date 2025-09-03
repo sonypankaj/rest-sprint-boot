@@ -1,7 +1,9 @@
 package com.example.javaspringtbootjpa.web;
 
 import com.example.javaspringtbootjpa.business.TourRatingService;
+import com.example.javaspringtbootjpa.model.RatingDto;
 import com.example.javaspringtbootjpa.model.TourRating;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 /** Tour Rating Controller */
 @RestController
-@RequestMapping(path = "/tours/{tourId}/ratings")
+@RequestMapping(path = "/api/tours/{tourId}/ratings")
+@Tag(name = "Rate the a tour and see the ratings between 1 to 5 with unique customer ID.")
 public class TourRatingController {
   private TourRatingService tourRatingService;
 
@@ -33,7 +36,7 @@ public class TourRatingController {
    * @param tourId
    * @param ratingDto
    */
-  @PostMapping
+  @PostMapping("/v1")
   @ResponseStatus(HttpStatus.CREATED)
   public RatingDto createTourRating(
       @PathVariable(value = "tourId") int tourId, @RequestBody @Valid RatingDto ratingDto) {

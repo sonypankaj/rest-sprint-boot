@@ -4,8 +4,8 @@ import com.example.javaspringtbootjpa.model.Difficulty;
 import com.example.javaspringtbootjpa.model.Region;
 import com.example.javaspringtbootjpa.model.Tour;
 import com.example.javaspringtbootjpa.model.TourPackage;
-import com.example.javaspringtbootjpa.repo.TourPackageRepository;
-import com.example.javaspringtbootjpa.repo.TourRepository;
+import com.example.javaspringtbootjpa.repository.TourPackageRepository;
+import com.example.javaspringtbootjpa.repository.TourRepository;
 import java.util.List;
 import org.springframework.stereotype.Service;
 

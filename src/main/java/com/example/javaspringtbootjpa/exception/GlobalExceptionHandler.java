@@ -1,4 +1,4 @@
-package com.example.javaspringtbootjpa.web;
+package com.example.javaspringtbootjpa.exception;
 
 import java.util.NoSuchElementException;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;

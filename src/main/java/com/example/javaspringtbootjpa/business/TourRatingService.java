@@ -2,8 +2,8 @@ package com.example.javaspringtbootjpa.business;
 
 import com.example.javaspringtbootjpa.model.Tour;
 import com.example.javaspringtbootjpa.model.TourRating;
-import com.example.javaspringtbootjpa.repo.TourRatingRepository;
-import com.example.javaspringtbootjpa.repo.TourRepository;
+import com.example.javaspringtbootjpa.repository.TourRatingRepository;
+import com.example.javaspringtbootjpa.repository.TourRepository;
 import jakarta.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -16,8 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class TourRatingService {
-  private TourRatingRepository tourRatingRepository;
-  private TourRepository tourRepository;
+  private final TourRatingRepository tourRatingRepository;
+  private final TourRepository tourRepository;
 
   /**
    * Construct TourRatingService

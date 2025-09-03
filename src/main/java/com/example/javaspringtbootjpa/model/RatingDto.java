@@ -1,6 +1,5 @@
-package com.example.javaspringtbootjpa.web;
+package com.example.javaspringtbootjpa.model;
 
-import com.example.javaspringtbootjpa.model.TourRating;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
